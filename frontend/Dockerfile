@@ -11,8 +11,7 @@ COPY . .
 RUN npm run build
 
 ARG RECAPTCHA_SITE_KEY
-RUN sed -i "s/REPLACE_WITH_RECAPTCHA_SITE_KEY/${RECAPTCHA_SITE_KEY}/g" dist/index.html && \
-    sed -i "s/REPLACE_WITH_RECAPTCHA_SITE_KEY/${RECAPTCHA_SITE_KEY}/g" dist/script.js
+RUN find dist -type f -exec sed -i "s/REPLACE_WITH_RECAPTCHA_SITE_KEY/${RECAPTCHA_SITE_KEY}/g" {} +
 
 EXPOSE 8080
 
