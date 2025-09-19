@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    document.getElementById('status-text').textContent = 'Success!';
+                    document.getElementById('status-text').textContent = 'Success! If nothing happened, try link below.';
+                    document.getElementById('fallback_link').innerHTML = `<a href="mailto:${data.email}"></a>`;
                     setTimeout(() => {
                         window.location.href = `mailto:${data.email}`;
                     }, 1000);
