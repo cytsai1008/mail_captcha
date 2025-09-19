@@ -15,7 +15,7 @@ services:
         RECAPTCHA_SITE_KEY: ${RECAPTCHA_SITE_KEY}
     env_file:
       - ./.env
-    command: npm run build # Assuming a build script exists in package.json
+    command: sh -c "npm run build && npm start"
 
   nginx:
     image: nginx:latest
