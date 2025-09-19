@@ -8,7 +8,7 @@
     "lint:js": "eslint .",
     "lint:css": "stylelint \"**/*.css\"",
     "lint:html": "htmlhint \"**/*.html\"",
-    "start": "http-server -c-1",
+    "start": "http-server dist -c-1",
     "build": "mkdir -p dist && cp *.html *.css *.js theme.js -r dist"
   },
   "keywords": [],

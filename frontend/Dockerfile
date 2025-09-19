@@ -15,3 +15,5 @@ RUN sed -i "s/REPLACE_WITH_RECAPTCHA_SITE_KEY/${RECAPTCHA_SITE_KEY}/g" dist/inde
     sed -i "s/REPLACE_WITH_RECAPTCHA_SITE_KEY/${RECAPTCHA_SITE_KEY}/g" dist/script.js
 
 EXPOSE 8080
+
+CMD [ "npm", "start" ]
