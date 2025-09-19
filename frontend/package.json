@@ -1,0 +1,27 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
+    "lint:js": "eslint .",
+    "lint:css": "stylelint \"**/*.css\"",
+    "lint:html": "htmlhint \"**/*.html\"",
+    "start": "http-server -c-1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.35.0",
+    "globals": "^16.4.0",
+    "htmlhint": "^1.7.1",
+    "http-server": "^14.1.1",
+    "postcss": "^8.5.6",
+    "stylelint": "^16.24.0",
+    "stylelint-config-standard": "^39.0.0",
+    "tailwindcss": "^4.1.13"
+  }
+}
