@@ -17,37 +17,33 @@ This project demonstrates how to use reCAPTCHA v3 to protect a `mailto:` link fr
 - Add your domain (or `localhost` for testing).
 - Copy the **site key** and the **secret key**.
 
-### 2. Frontend Configuration
+### 2. Environment Variables
 
-- Open `frontend/index.html` and replace `YOUR_SITE_KEY` with your reCAPTCHA v3 **site key**.
-- Open `frontend/script.js` and replace `YOUR_SITE_KEY` with your reCAPTCHA v3 **site key**.
-
-### 3. Backend Configuration
-
-- In the `backend` directory, create a file named `.env`.
-- Add the following to the `.env` file:
-
-```
-RECAPTCHA_SECRET_KEY=YOUR_SECRET_KEY
-MAIL_TO_EMAIL=your-email@example.com
-```
-
-- Replace `YOUR_SECRET_KEY` with your reCAPTCHA v3 **secret key**.
-- Replace `your-email@example.com` with your desired email address.
+- Create a `.env` file in the root of the project by copying `.env.example`:
+  ```bash
+  cp .env.example .env
+  ```
+- Open the newly created `.env` file and fill in the following:
+  - `RECAPTCHA_SECRET_KEY`: Your reCAPTCHA v3 **secret key**.
+  - `RECAPTCHA_SITE_KEY`: Your reCAPTCHA v3 **site key**.
+  - `MAIL_TO_EMAIL`: The email address that the `mailto:` link should use (e.g., `your-email@example.com`).
 
 ## Running the Project
 
-1.  **Start the Backend:**
-    - Open a terminal in the `backend` directory.
-    - Run `npm install` to install the dependencies.
-    - Run `node server.js` to start the server.
-
-2.  **Start the Frontend:**
-    - Open `frontend/index.html` in your web browser.
+1.  **Build and Run with Docker Compose:**
+    - Make sure you have Docker and Docker Compose installed.
+    - Open a terminal in the root of the project.
+    - Run the following command to build the images and start the services:
+      ```bash
+      docker-compose up --build
+      ```
+2.  **Access the Application:**
+    - Open your web browser and navigate to `http://localhost`.
+    - Nginx will serve the frontend, and all API requests will be proxied to the backend.
 
 3.  **Verify:**
-    - Click the "Verify and Get Email" button.
-    - If the reCAPTCHA verification is successful, your default email client will open with a new message addressed to the email you configured in the backend.
+    - The frontend will attempt to verify you as human using reCAPTCHA v3.
+    - If the reCAPTCHA verification is successful, your default email client will open with a new message addressed to the email you configured in the `.env` file.
 
 ## How it Works
 

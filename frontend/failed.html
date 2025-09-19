@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification Failed</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verification Failed</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.2/dist/basecoat.cdn.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.2/dist/js/all.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js" defer></script>
 </head>
-<body>
-    <div class="container">
-        <h1>Verification Failed</h1>
-        <p>Unfortunately, we could not verify that you are human. Please try again.</p>
-        <button onclick="window.location.href='index.html'">Try Again</button>
-    </div>
+
+<body class="bg-background text-foreground flex justify-center items-center h-screen text-center">
+<div class="card w-full max-w-md">
+  <header class="text-center">
+    <h2 class="text-lg font-semibold">Verification Failed</h2>
+  </header>
+  <section class="flex flex-col items-center gap-4">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 text-destructive">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="15" y1="9" x2="9" y2="15"></line>
+      <line x1="9" y1="9" x2="15" y2="15"></line>
+    </svg>
+    <p class="text-muted-foreground">Unfortunately, we could not verify that you are human. Please try again, or maybe
+      try other way to contact me.</p>
+    <button onclick="window.location.href='index.html'" class="btn btn-primary">Try Again</button>
+  </section>
+</div>
+
 </body>
+
 </html>

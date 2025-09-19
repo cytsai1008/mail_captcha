@@ -1,7 +1,9 @@
+const backendUrl = window.location.origin.includes('localhost') ? 'http://localhost:3000' : '/api';
+
 document.addEventListener('DOMContentLoaded', function() {
     grecaptcha.ready(function() {
-        grecaptcha.execute('6LeGis4rAAAAAH14N9IbwRsYNpPZxnvRPEg9PQCJ', {action: 'submit'}).then(function(token) {
-            fetch('http://localhost:3000/verify', {
+        grecaptcha.execute('REPLACE_WITH_RECAPTCHA_SITE_KEY', {action: 'submit'}).then(function(token) {
+            fetch(`${backendUrl}/verify`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -21,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('An error occurred during verification.');
+                window.location.href = 'failed.html';
             });
         });
     });
