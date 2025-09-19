@@ -2,7 +2,7 @@ const backendUrl = window.location.origin.includes('localhost') ? 'http://localh
 
 document.addEventListener('DOMContentLoaded', function() {
     grecaptcha.ready(function() {
-        grecaptcha.execute('REPLACE_WITH_RECAPTCHA_SITE_KEY', {action: 'submit'}).then(function(token) {
+        grecaptcha.execute('6LeGis4rAAAAAH14N9IbwRsYNpPZxnvRPEg9PQCJ', {action: 'submit'}).then(function(token) {
             fetch(`${backendUrl}/verify`, {
                 method: 'POST',
                 headers: {
