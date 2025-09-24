@@ -3,12 +3,14 @@ services:
     image: ghcr.io/cytsai1008/mail_captcha-backend:latest
     env_file:
       - ./.env
+    restart: unless-stopped
 
   frontend:
     image: ghcr.io/cytsai1008/mail_captcha-frontend:latest
     env_file:
       - ./.env
     command: sh -c "npm run build && npm start"
+    restart: unless-stopped
 
   nginx:
     image: nginx:latest
@@ -20,3 +22,4 @@ services:
     depends_on:
       - frontend
       - backend
+    restart: unless-stopped
