@@ -1,1 +1,147 @@
-/* This file is intentionally left empty as styles are handled directly in index.html. */
+/* Simple, modern styles for human verification page */
+:root {
+  --background: #f8fafc;
+  --foreground: #22223b;
+  --card-bg: #fff;
+  --card-shadow: 0 2px 16px rgb(0 0 0 / 7%);
+  --muted-foreground: #6c757d;
+  --destructive: #dc2626;
+  --primary: #2563eb;
+  --primary-foreground: #fff;
+  --transition: background 0.3s, color 0.3s;
+
+  font-family: "Chiron GoRound TC", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #181a1b;
+    --foreground: #f3f4f6;
+    --card-bg: #23272f;
+    --card-shadow: 0 2px 16px rgb(0 0 0 / 40%);
+    --muted-foreground: #a0aec0;
+    --destructive: #ef4444;
+  }
+}
+
+body.bg-background {
+  background: var(--background);
+  color: var(--foreground);
+  transition: var(--transition);
+}
+
+.text-foreground {
+  color: var(--foreground);
+  transition: var(--transition);
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: var(--card-shadow);
+  margin: 1rem;
+  transition: var(--transition);
+}
+
+.text-muted-foreground {
+  color: var(--muted-foreground);
+  transition: var(--transition);
+}
+
+.text-destructive {
+  color: var(--destructive);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-12 {
+  width: 3rem;
+}
+
+.h-12 {
+  height: 3rem;
+}
+
+.max-w-md {
+  max-width: 40rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.text-2xl {
+  font-size: 2rem;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.btn-primary:hover {
+  background-color: color-mix(in srgb, var(--primary) 90%, black);
+}

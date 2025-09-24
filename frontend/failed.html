@@ -5,16 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Verification Failed</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.2/dist/basecoat.cdn.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.2/dist/js/all.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
   <script src="theme.js" defer></script>
 </head>
 
-<body class="bg-background text-foreground flex justify-center items-center h-screen text-center">
-<div class="card w-full max-w-md">
-  <header class="text-center">
+<body class="bg-background text-foreground flex justify-center items-center min-h-screen text-center">
+<div class="card w-full max-w-md p-8">
+  <header class="text-center mb-4">
     <h2 class="text-lg font-semibold">Verification Failed</h2>
   </header>
   <section class="flex flex-col items-center gap-4">
@@ -24,8 +25,8 @@
       <line x1="15" y1="9" x2="9" y2="15"></line>
       <line x1="9" y1="9" x2="15" y2="15"></line>
     </svg>
-    <p class="text-muted-foreground">Unfortunately, we could not verify that you are human. Please try again, or maybe
-      try other way to contact me.</p>
+    <p class="text-muted-foreground">Unfortunately, we could not verify that you are human. <br>
+      Please try again, or try other way to contact me.</p>
     <button onclick="window.location.href='index.html'" class="btn btn-primary">Try Again</button>
   </section>
 </div>

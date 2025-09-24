@@ -4,28 +4,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>reCAPTCHA v3 Verification</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.2/dist/basecoat.cdn.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.2/dist/js/all.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Human Verification</title>
+  <meta name="description"
+        content="Verify you are human to continue. You will be redirected to a mailto link after verification.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="https://www.google.com/recaptcha/api.js?render=6LeGis4rAAAAAH14N9IbwRsYNpPZxnvRPEg9PQCJ"></script>
-  <script src="script.js" defer></script>
-  <script src="theme.js" defer></script>
 </head>
 
-<body class="bg-background text-foreground flex justify-center items-center h-screen text-center">
-<div class="card w-full max-w-md">
-  <header class="text-center">
-    <h2 class="text-lg font-semibold">Human Verification</h2>
-  </header>
-  <section class="flex flex-col items-center gap-4">
-    <p id="status-text" class="text-muted-foreground">I want to make sure you are human <br> You'll be auto-redirected
-      to a mailto link</p>
-    <p id="fallback_link" class="text-muted-foreground"></p>
-  </section>
-</div>
-
+<body class="bg-background text-foreground flex justify-center items-center min-h-screen">
+<main class="card w-full max-w-md text-center p-8" role="main" aria-labelledby="main-title">
+  <h1 id="main-title" class="text-2xl font-bold mb-4">Human Verification</h1>
+  <p class="mb-4">
+    To prevent spam in my email, please verify you are human.<br>
+    After verification, you will be redirected to a mailto link.
+  </p>
+  <p id="status-text" class="text-muted-foreground mb-2"></p>
+  <p id="fallback_link" class="text-muted-foreground"></p>
+</main>
+<script src="https://www.google.com/recaptcha/api.js?render=6LeGis4rAAAAAH14N9IbwRsYNpPZxnvRPEg9PQCJ"></script>
+<script src="script.js" defer></script>
+<script src="theme.js" defer></script>
 </body>
 
 </html>
