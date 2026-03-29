@@ -23,7 +23,11 @@ async function handleVerify(request, env) {
     try {
         const { token } = await request.json();
 
-        const body = new URLSearchParams({ secret: env.RECAPTCHA_SECRET_KEY, response: token });
+        if (typeof token !== 'string' || token.trim() === '') {
+            return Response.json({ success: false, message: 'Missing or invalid reCAPTCHA token.' }, { status: 400 });
+        }
+
+        const body = new URLSearchParams({ secret: env.RECAPTCHA_SECRET_KEY, response: token.trim() });
         const ip = request.headers.get('CF-Connecting-IP');
         if (ip) body.append('remoteip', ip);
 
@@ -31,6 +35,12 @@ async function handleVerify(request, env) {
             method: 'POST',
             body,
         });
+
+        if (!response.ok) {
+            console.error('reCAPTCHA siteverify request failed with status:', response.status);
+            return Response.json({ success: false, message: 'Unable to verify reCAPTCHA at this time.' }, { status: 502 });
+        }
+
         const data = await response.json();
 
         const hostname = new URL(request.url).hostname;

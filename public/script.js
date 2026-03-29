@@ -1,6 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
     const recaptchaScript = document.querySelector('script[src*="recaptcha/api.js"]');
-    const siteKey = new URL(recaptchaScript.src).searchParams.get('render');
+    if (!recaptchaScript || !recaptchaScript.src) {
+        console.error('reCAPTCHA script tag is missing or has no src.');
+        window.location.href = 'failed.html';
+        return;
+    }
+
+    let siteKey;
+    try {
+        siteKey = new URL(recaptchaScript.src).searchParams.get('render');
+    } catch (e) {
+        console.error('Failed to parse reCAPTCHA script URL:', e);
+        window.location.href = 'failed.html';
+        return;
+    }
+
+    if (!siteKey) {
+        console.error('reCAPTCHA site key is missing from script URL.');
+        window.location.href = 'failed.html';
+        return;
+    }
+
+    if (typeof grecaptcha === 'undefined' || typeof grecaptcha.ready !== 'function') {
+        console.error('grecaptcha is not available.');
+        window.location.href = 'failed.html';
+        return;
+    }
 
     grecaptcha.ready(function() {
         grecaptcha.execute(siteKey, {action: 'submit'}).then(function(token) {
