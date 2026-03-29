@@ -1,0 +1,11 @@
+name = "mail-captcha"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Set secrets via: wrangler secret put RECAPTCHA_SECRET_KEY
+# Set secrets via: wrangler secret put MAIL_TO_EMAIL
+# RECAPTCHA_SITE_KEY is public and can go here (or stay hardcoded in HTML)
