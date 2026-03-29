@@ -8,4 +8,3 @@ binding = "ASSETS"
 
 # Set secrets via: wrangler secret put RECAPTCHA_SECRET_KEY
 # Set secrets via: wrangler secret put MAIL_TO_EMAIL
-# RECAPTCHA_SITE_KEY is public and can go here (or stay hardcoded in HTML)
