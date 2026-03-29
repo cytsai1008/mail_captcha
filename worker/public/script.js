@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const recaptchaScript = document.querySelector('script[src*="recaptcha/api.js"]');
+    const siteKey = new URL(recaptchaScript.src).searchParams.get('render');
+
     grecaptcha.ready(function() {
-        grecaptcha.execute('6LeGis4rAAAAAH14N9IbwRsYNpPZxnvRPEg9PQCJ', {action: 'submit'}).then(function(token) {
+        grecaptcha.execute(siteKey, {action: 'submit'}).then(function(token) {
             fetch('/verify', {
                 method: 'POST',
                 headers: {
@@ -12,9 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.success) {
                     document.getElementById('status-text').textContent = 'Success! If nothing happened, try link below.';
-                    document.getElementById('fallback_link').innerHTML = `<a href="mailto:${data.email}">mailto:${data.email}</a>`;
+                    const mailtoHref = `mailto:${data.email}`;
+                    const link = document.createElement('a');
+                    link.href = mailtoHref;
+                    link.textContent = mailtoHref;
+                    document.getElementById('fallback_link').replaceChildren(link);
                     setTimeout(() => {
-                        window.location.href = `mailto:${data.email}`;
+                        window.location.href = mailtoHref;
                     }, 1000);
                 } else {
                     window.location.href = 'failed.html';
