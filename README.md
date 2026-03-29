@@ -1,55 +1,58 @@
-# reCAPTCHA v3 Mailto Verification (Fullstack)
+# reCAPTCHA v3 Mailto Verification
 
-This project demonstrates how to use reCAPTCHA v3 to protect a `mailto:` link from bots, using a secure backend to handle verification.
+Protects a `mailto:` link from bots using Google reCAPTCHA v3, deployed as a Cloudflare Worker with static asset serving.
+
+## How it Works
+
+1. User visits the page — reCAPTCHA v3 runs invisibly in the background.
+2. A token is sent to the `/verify` endpoint on the Worker.
+3. The Worker verifies the token with Google's API using the secret key (never exposed to the client).
+4. On success, the Worker returns the email address and the user is redirected to the `mailto:` link.
+5. On failure, the user is redirected to a failure page.
 
 ## Project Structure
 
-- `/frontend`: Contains the HTML, CSS, and JavaScript for the user-facing website.
-- `/backend`: Contains the Node.js server that handles reCAPTCHA verification.
+```
+├── src/
+│   └── index.js        # Cloudflare Worker (handles /verify and /health)
+├── public/
+│   ├── index.html      # Verification page
+│   ├── failed.html     # Failure page
+│   ├── script.js       # reCAPTCHA logic + fetch to /verify
+│   └── style.css       # Styles (light/dark mode via CSS media query)
+├── wrangler.toml       # Cloudflare Workers config
+└── package.json
+```
 
 ## Setup
 
 ### 1. reCAPTCHA v3 Keys
 
 - Go to the [Google reCAPTCHA admin console](https://www.google.com/recaptcha/admin/).
-- Register a new site.
-- Choose **reCAPTCHA v3**.
-- Add your domain (or `localhost` for testing).
-- Copy the **site key** and the **secret key**.
+- Register a new site, choose **reCAPTCHA v3**, and add your domain.
+- Copy the **site key** and **secret key**.
+- Set the site key in `public/index.html` (the `?render=` query param on the reCAPTCHA script tag).
 
-### 2. Environment Variables
+### 2. Secrets
 
-- Create a `.env` file in the root of the project by copying `.env.example`:
-  ```bash
-  cp .env.example .env
-  ```
-- Open the newly created `.env` file and fill in the following:
-  - `RECAPTCHA_SECRET_KEY`: Your reCAPTCHA v3 **secret key**.
-  - `RECAPTCHA_SITE_KEY`: Your reCAPTCHA v3 **site key**.
-  - `MAIL_TO_EMAIL`: The email address that the `mailto:` link should use (e.g., `your-email@example.com`).
+Set the required secrets via the Wrangler CLI:
 
-## Running the Project
+```bash
+wrangler secret put RECAPTCHA_SECRET_KEY
+wrangler secret put MAIL_TO_EMAIL
+```
 
-1.  **Build and Run with Docker Compose:**
-    - Make sure you have Docker and Docker Compose installed.
-    - Open a terminal in the root of the project.
-    - Run the following command to build the images and start the services:
-      ```bash
-      docker-compose up --build
-      ```
-2.  **Access the Application:**
-    - Open your web browser and navigate to `http://localhost`.
-    - Nginx will serve the frontend, and all API requests will be proxied to the backend.
+## Development
 
-3.  **Verify:**
-    - The frontend will attempt to verify you as human using reCAPTCHA v3.
-    - If the reCAPTCHA verification is successful, your default email client will open with a new message addressed to the email you configured in the `.env` file.
+```bash
+npm install
+npm run dev     # wrangler dev — runs Worker locally at http://localhost:8787
+```
 
-## How it Works
+## Deployment
 
-1.  The user clicks the button on the frontend.
-2.  reCAPTCHA v3 generates a token.
-3.  The frontend sends the token to the `/verify` endpoint on the backend.
-4.  The backend sends the token and your **secret key** to the Google reCAPTCHA API for verification.
-5.  If the verification is successful, the backend sends the email address to the frontend.
-6.  The frontend receives the email address and redirects the user to the `mailto:` link.
+```bash
+npm run deploy  # wrangler deploy
+```
+
+The Worker is automatically deployed via Cloudflare's Git integration on every push to `main`.
