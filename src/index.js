@@ -3,14 +3,19 @@ export default {
         const url = new URL(request.url);
 
         if (url.pathname === '/verify' && request.method === 'POST') {
-            return handleVerify(request, env);
+            const res = await handleVerify(request, env);
+            res.headers.set('X-Robots-Tag', 'noindex, nofollow');
+            return res;
         }
 
         if (url.pathname === '/health' && request.method === 'GET') {
-            return Response.json({ status: 'ok' });
+            return Response.json({ status: 'ok' }, { headers: { 'X-Robots-Tag': 'noindex, nofollow' } });
         }
 
-        return env.ASSETS.fetch(request);
+        const res = await env.ASSETS.fetch(request);
+        const mutableRes = new Response(res.body, res);
+        mutableRes.headers.set('X-Robots-Tag', 'noindex, nofollow');
+        return mutableRes;
     },
 };
 

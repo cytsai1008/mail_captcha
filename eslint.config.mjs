@@ -11,6 +11,8 @@ export default [
                 URL: 'readonly',
                 Response: 'readonly',
                 Request: 'readonly',
+                URLSearchParams: 'readonly',
+                console: 'readonly',
             },
         },
         rules: {
